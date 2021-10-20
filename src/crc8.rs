@@ -1,4 +1,4 @@
-use crate::as_net::*;
+/// A standalone, single-file implementation of CRC-8.
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct CRC8 {
@@ -49,15 +49,13 @@ impl CRC8 {
 
         return CRC8 { table: table };
     }
-
-    pub fn netendian<T: AsNetworkByteOrder>(&self, t: T) -> u8 {
-        self.of(t.bytes().as_ref(), 0x00)
-    }
 }
 
 const ATM8: u8 = 0x07;
 
 impl Default for CRC8 {
+    /// The default CRC-8 polynomial is x⁸ + x² + x + 1, sometimes called
+    /// `ATM-8`.
     fn default() -> Self {
         CRC8::new(ATM8)
     }
@@ -67,16 +65,22 @@ impl Default for CRC8 {
 mod tests {
     use super::*;
 
+    /// Values checked with:
+    /// http://www.sunshine2k.de/coding/javascript/crc/crc_js.html
     #[test]
-    fn check_simple() {
+    fn spot_check() {
         let atm8 = |num: u32| {
-            CRC8::new(ATM8).netendian(num)
+            CRC8::new(ATM8).of(&num.to_be_bytes(), 0x00)
         };
 
         assert_eq!(atm8(0x00000000), 0x00);
         assert_eq!(atm8(0x00000001), ATM8);
+        assert_eq!(atm8(0xFFFFFFFF), 0xDE);
+
+        // Drawn from:
+        // "Correcting Single-bit Errors with CRC8 in ATM Cell Headers"
+        // https://www.nxp.com.cn/docs/en/application-note/AN2918.pdf
         assert_eq!(atm8(0x30313233), 0x69);
         assert_eq!(atm8(0x31313233), 0x7F);
-        assert_eq!(atm8(0xFFFFFFFF), 0xDE);
     }
 }

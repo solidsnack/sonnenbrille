@@ -1,7 +1,9 @@
 use std::hash::Hasher;
 
-use crate::sunshine_crc8::*;
+use crate::crc8::*;
 
+/// Provides a hashing implementation that conforms to the Rust standard
+/// libraries standard interface.
 #[derive(Debug)]
 pub struct CRC8Hasher {
     pub crc8: CRC8,
@@ -18,6 +20,8 @@ impl CRC8Hasher {
 }
 
 impl Default for CRC8Hasher {
+    /// The default CRC-8 polynomial is x⁸ + x² + x + 1, sometimes called
+    /// `ATM-8`, and the default starting value is `0x00`.
     fn default() -> Self {
         CRC8Hasher {
             crc8: CRC8::default(),

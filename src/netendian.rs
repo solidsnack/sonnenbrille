@@ -1,86 +1,87 @@
-pub trait AsNetworkByteOrder {
+/// Types which have a canonical network byte-order representation.
+pub trait NetEndian {
     type Bytes: AsRef<[u8]>;
     fn bytes(&self) -> Self::Bytes;
 }
 
-impl AsNetworkByteOrder for usize {
+impl NetEndian for usize {
     type Bytes = [u8; 8];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for u8 {
+impl NetEndian for u8 {
     type Bytes = [u8; 1];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for u16 {
+impl NetEndian for u16 {
     type Bytes = [u8; 2];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for u32 {
+impl NetEndian for u32 {
     type Bytes = [u8; 4];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for u64 {
+impl NetEndian for u64 {
     type Bytes = [u8; 8];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for u128 {
+impl NetEndian for u128 {
     type Bytes = [u8; 16];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for isize {
+impl NetEndian for isize {
     type Bytes = [u8; 8];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for i8 {
+impl NetEndian for i8 {
     type Bytes = [u8; 1];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for i16 {
+impl NetEndian for i16 {
     type Bytes = [u8; 2];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for i32 {
+impl NetEndian for i32 {
     type Bytes = [u8; 4];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for i64 {
+impl NetEndian for i64 {
     type Bytes = [u8; 8];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
 }
 
-impl AsNetworkByteOrder for i128 {
+impl NetEndian for i128 {
     type Bytes = [u8; 16];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();

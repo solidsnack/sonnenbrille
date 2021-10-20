@@ -1,7 +1,14 @@
-mod as_net;
-mod hasher;
-mod sunshine_crc8;
+//! An implementation of 8-bit CRC, following conventions established by the
+//! `sunshine2k.de` technical [note].
+//!
+//! [note]: http://www.sunshine2k.de/articles/coding/crc/understanding_crc.html
 
-pub use as_net::AsNetworkByteOrder;
+mod crc8;
+mod netendian;
+mod net_crc8;
+mod hasher;
+
+pub use crc8::CRC8;
 pub use hasher::CRC8Hasher;
-pub use sunshine_crc8::CRC8;
+pub use netendian::NetEndian;
+pub use net_crc8::NetCRC8;
