@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2018"
 license = "MIT OR Apache-2.0"
 description = "An implementation of 8-bit CRC."
+documentation = "https://github.com/solidsnack/sonnenbrille#readme"
+homepage = "https://github.com/solidsnack/sonnenbrille"
+repository = "https://github.com/solidsnack/sonnenbrille"
 
 [dev-dependencies]
-rand = "*"
+rand = "0.*"
