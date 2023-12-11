@@ -5,7 +5,7 @@ pub trait NetEndian {
 }
 
 impl NetEndian for usize {
-    type Bytes = [u8; 8];
+    type Bytes = [u8; (usize::BITS / 8) as usize];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
@@ -47,7 +47,7 @@ impl NetEndian for u128 {
 }
 
 impl NetEndian for isize {
-    type Bytes = [u8; 8];
+    type Bytes = [u8; (isize::BITS / 8) as usize];
     fn bytes(&self) -> Self::Bytes {
         return self.to_be_bytes();
     }
